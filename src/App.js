@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 function App() {
 
@@ -35,14 +35,11 @@ function App() {
       setbuttonname ('copy')
     }, 2000);
   }
-
-  
-  useEffect(()=>{
-    passwordChange();
-    
-  },[lenght, number, charchter])
  
-
+  useEffect(()=>{
+    passwordChange();  
+  },[lenght, number, charchter, passwordChange])
+ 
   return (
     <>
     <div className="MainApp">
