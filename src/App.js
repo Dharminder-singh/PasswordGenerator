@@ -5,7 +5,7 @@ function App() {
   const [password, setpassword ] = useState('')
   const [lenght , setlenght] = useState(8)
   const [number, setnumber] = useState(false)
-  const [charchter, setcharchter] = useState(false)
+  const [character, setcharacter] = useState(false)
   const [buttonColor ,setbuttonColor] = useState('')
   const [buttonname ,setbuttonname] = useState('copy')
 
@@ -15,7 +15,7 @@ function App() {
     if(number){ 
       str += "1234567890" 
     }
-    if(charchter){
+    if(character){
       str += "@#^*&_%!"
     }
     for( let i = 1; i <= lenght; i++ ){
@@ -23,13 +23,15 @@ function App() {
     pass += str.charAt(char)
     }
     setpassword(pass)
-  },[lenght, number, charchter, setpassword])
+  },[lenght, number, character, setpassword])
 
   
   const copyPass = ()=>{
+    if(lenght >= 1){
     window.navigator.clipboard.writeText(password)
     setbuttonColor('green')
     setbuttonname('copied')
+    }
     setTimeout(() => {
       setbuttonColor('blue')
       setbuttonname ('copy')
@@ -38,23 +40,30 @@ function App() {
  
   useEffect(()=>{
     passwordChange();  
-  },[lenght, number, charchter, passwordChange])
+  },[lenght, number, character, passwordChange])
  
   return (
     <>
     <div className="MainApp">
-      <div className="password">
-      <input type="text" readOnly placeholder="password" value={password}/>
-      <button style={{backgroundColor : `${buttonColor}`}} onClick={copyPass}>{buttonname}</button>
-      </div>
-      <div className="tools">
-      <input type="range" max={100} min={0} value={lenght} onChange={(e)=> setlenght(e.target.value)}/>
-      <label>lenght:{lenght}</label>
-      <input type="checkbox" value={number} onChange={() => setnumber((prev) => !prev)}/>
-      <label>Number</label>
-      <input type="checkbox" value={charchter} onChange={() => setcharchter((prev )=> !prev)}/>
-      <label>charchter</label>
-
+      <div className="passwordApp">
+        <div className="password">
+          <input type="text" readOnly placeholder="password" value={password}/>
+          <button style={{backgroundColor : `${buttonColor}`}} onClick={copyPass}>{buttonname}</button>
+        </div>
+        <div className="tools">
+          <div className="range">
+            <input type="range" id="lenght" max={100} min={0} value={lenght} onChange={(e)=> setlenght(e.target.value)}/>
+            <label htmlFor="lenght">lenght:{lenght}</label>
+          </div>
+          <div className="number">
+            <input type="checkbox" value={number} onChange={() => setnumber((prev) => !prev)}/>
+            <label>Number</label>
+          </div>
+          <div className="character">
+            <input type="checkbox" value={character} onChange={() => setcharacter((prev )=> !prev)}/>
+            <label>character</label>
+          </div>
+        </div>
       </div>
     </div>
     </>

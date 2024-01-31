@@ -18,7 +18,7 @@
 
 }
 .password input{
-  width: 50%;
+  width: 100%;
   height: 50px;
   outline: none;
   padding: 10px;
@@ -40,9 +40,31 @@ padding: 10px 25px;
   color: orange;
   height: 100px;
 }
-input[type = "range"]{
-  color:internal-light-dark(rgb(64, 26, 216), rgb(255, 255, 255));
-}
 label{
   margin: 0 5px;
+}
+.number , .character, .range {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.passwordApp{
+  width: 70%;
+  max-width: 800px;
+}
+@media screen and (max-width: 400px) {
+  .tools{
+     flex-direction: column;
+     align-items: flex-start;
+  }
+  .number , .character, .range{
+    justify-content: flex-start;
+    margin: 5px;
+  }
+  body{
+    min-width: 250px;
+    background-color: gray;
+  }
+  
 }
